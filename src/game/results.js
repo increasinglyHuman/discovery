@@ -1,6 +1,8 @@
 import { state } from '../state.js';
 import { ENCOUNTERS, SHIP_LOGS, RANKS } from '../data/encounters.js';
 import { showScreen } from '../ui/screens.js';
+import { generateAdvice } from './advice.js';
+import { renderScoreboard } from './scoreboard.js';
 
 export function renderResult(enc, openness, accuracy, total) {
   const screen = document.getElementById('screen-result');
@@ -119,6 +121,9 @@ function renderFinalResults() {
       </div>`;
   });
 
+  // Generate personalized advice
+  const adviceHTML = generateAdvice(state.scores);
+
   screen.innerHTML = `
     <div class="final-rank-label">Your Explorer Rank</div>
     <div class="final-rank ${rank.cls}">${rank.name}</div>
@@ -137,12 +142,13 @@ function renderFinalResults() {
         <span class="highlight">a single, planet-spanning living system</span>.
       </p>
       <p style="margin-top:12px;">
-        The crystalline basin, the hexagonal columns, and the atmospheric electromagnetic signal
-        are not separate phenomena — they are <span class="highlight">organs of one massive superorganism</span>,
+        The crystalline basin, the hexagonal columns, the atmospheric signal,
+        the luminous migrations, the mineral archive, and the planet's response to your presence
+        — these are not separate phenomena. They are <span class="highlight">organs of one massive superorganism</span>,
         connected through shared biochemistry and synchronized through the planetary field.
       </p>
       <p style="margin-top:12px;">
-        Explorers who held multiple hypotheses across all three encounters were best positioned
+        Explorers who held multiple hypotheses across all six encounters were best positioned
         to see this bigger picture. Those who locked in a single explanation early
         missed the connections hiding in plain sight.
       </p>
@@ -183,6 +189,13 @@ function renderFinalResults() {
       </p>
     </div>
 
+    <div class="advice-card mt-md">
+      <h3>Your Next Mission Briefing</h3>
+      <p>${adviceHTML}</p>
+    </div>
+
+    <div id="scoreboard-container" class="mt-md"></div>
+
     <div class="text-center mt-lg" style="padding-bottom:40px;">
       <button class="btn" id="btn-replay">Play Again</button>
     </div>
@@ -190,4 +203,11 @@ function renderFinalResults() {
 
   document.getElementById('btn-replay').addEventListener('click', () => location.reload());
   showScreen('final');
+
+  // Load scoreboard asynchronously
+  renderScoreboard(
+    document.getElementById('scoreboard-container'),
+    avgScore,
+    rank.name
+  );
 }

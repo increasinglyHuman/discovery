@@ -17,7 +17,7 @@ export function renderEncounter() {
   const header = document.createElement('div');
   header.innerHTML = `
     <div class="encounter-header">
-      <span class="encounter-num">Encounter ${enc.num} of 3</span>
+      <span class="encounter-num">Encounter ${enc.num} of ${ENCOUNTERS.length}</span>
     </div>
     <h2 class="encounter-title">${enc.title}</h2>
     <div class="encounter-location">${enc.location}</div>

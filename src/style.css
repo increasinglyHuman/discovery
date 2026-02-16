@@ -167,6 +167,57 @@ body {
 }
 @keyframes emWave { 0% { width: 10px; height: 10px; opacity: 1; } 100% { width: 300px; height: 300px; opacity: 0; } }
 
+/* Migration scene — luminous flowing motes */
+.scene-migration { background: linear-gradient(180deg, #061a14 0%, #0d2e24 50%, #061a14 100%); }
+.scene-migration .mote {
+  position: absolute; left: -10px;
+  width: var(--size, 3px); height: var(--size, 3px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(71,255,160,0.9), rgba(0,229,255,0.3));
+  box-shadow: 0 0 6px rgba(71,255,160,0.5);
+  animation: moteFlow linear infinite;
+}
+@keyframes moteFlow {
+  0% { left: -10px; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 110%; opacity: 0; }
+}
+
+/* Archive scene — mineral strata bands */
+.scene-archive { background: linear-gradient(180deg, #1a0f06 0%, #2e1a0d 50%, #1a0f06 100%); }
+.scene-archive .stratum {
+  position: absolute; left: 0; width: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,179,71,0.4) 20%, rgba(255,179,71,0.2) 80%, transparent 100%);
+  animation: stratumPulse 6s ease-in-out infinite alternate;
+}
+@keyframes stratumPulse {
+  0% { opacity: var(--o, 0.2); }
+  100% { opacity: calc(var(--o, 0.2) + 0.15); }
+}
+
+/* Response scene — combined effects */
+.scene-response { background: linear-gradient(180deg, #0a061a 0%, #1a0d2e 40%, #0d0618 100%); }
+.scene-response .response-pulse {
+  position: absolute; bottom: 30%; left: 50%; transform: translate(-50%, 50%);
+  width: 60px; height: 60px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,71,171,0.5), transparent 70%);
+  animation: pulse 3.2s ease-in-out infinite;
+}
+.scene-response .response-wave {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  border-radius: 50%; border: 1px solid rgba(0,229,255,0.2);
+  animation: emWave 4s ease-out infinite;
+}
+.scene-response .mote {
+  position: absolute; left: -10px;
+  width: var(--size, 3px); height: var(--size, 3px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,179,71,0.8), rgba(255,71,171,0.3));
+  box-shadow: 0 0 4px rgba(255,179,71,0.4);
+  animation: moteFlow linear infinite;
+}
+
 /* === ENCOUNTER HEADER === */
 .encounter-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; padding-top: 24px; }
 .encounter-num {
@@ -495,6 +546,164 @@ body {
   .ship-log-text { font-size: 0.85rem; }
   .risk-dialog { padding: 20px; margin: 12px; }
   .risk-dialog p { font-size: 0.85rem; }
+  .advice-card { padding: 18px; }
+  .advice-card p { font-size: 0.85rem; }
+  .scoreboard { padding: 16px; }
+  .initial-box { width: 42px; height: 48px; font-size: 1.5rem; }
+  .scoreboard-row { gap: 6px; padding: 6px 8px; }
+  .sb-initials { font-size: 0.9rem; }
+}
+
+/* ── Advice Card ─────────────────────────────────── */
+.advice-card {
+  background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(71,255,160,0.06));
+  border: 1px solid rgba(0,229,255,0.2);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.advice-card h3 {
+  color: var(--accent-cyan);
+  font-size: 1rem;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.advice-card p {
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+.advice-card em {
+  color: var(--accent-cyan);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ── Scoreboard ─────────────────────────────────── */
+.scoreboard {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.scoreboard-title {
+  color: var(--accent-amber);
+  font-size: 1.1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.scoreboard-entry {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.scoreboard-qualify {
+  color: var(--accent-green);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+.initials-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.initial-box {
+  width: 48px;
+  height: 56px;
+  background: var(--bg-deep);
+  border: 2px solid var(--accent-amber);
+  border-radius: 8px;
+  color: var(--accent-amber);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+  caret-color: var(--accent-amber);
+  transition: border-color 0.2s;
+}
+.initial-box:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(0,229,255,0.3);
+}
+.initial-dash {
+  color: var(--text-dim);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.scoreboard-confirm {
+  color: var(--accent-green);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.scoreboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.scoreboard-row {
+  display: grid;
+  grid-template-columns: 32px 56px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.02);
+  transition: background 0.2s;
+}
+.scoreboard-row:nth-child(1) { background: rgba(255,179,71,0.08); }
+.scoreboard-row:nth-child(2) { background: rgba(255,255,255,0.04); }
+.scoreboard-row:nth-child(3) { background: rgba(255,255,255,0.03); }
+.scoreboard-you {
+  background: rgba(0,229,255,0.1) !important;
+  border: 1px solid rgba(0,229,255,0.3);
+}
+.sb-pos {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+.scoreboard-row:nth-child(1) .sb-pos { color: var(--accent-amber); }
+.sb-initials {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-family: monospace;
+}
+.sb-rank {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.rank-framelocked { color: var(--accent-red); }
+.rank-investigator { color: var(--accent-amber); }
+.rank-wayfinder { color: var(--accent-cyan); }
+.rank-pathfinder { color: var(--accent-green); }
+.sb-score {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: right;
+}
+.scoreboard-empty {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  padding: 20px 0;
 }
 
 @media (max-width: 380px) {
