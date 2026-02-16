@@ -168,7 +168,7 @@ body {
 @keyframes emWave { 0% { width: 10px; height: 10px; opacity: 1; } 100% { width: 300px; height: 300px; opacity: 0; } }
 
 /* === ENCOUNTER HEADER === */
-.encounter-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+.encounter-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; padding-top: 24px; }
 .encounter-num {
   font-size: 0.7rem; letter-spacing: 0.2em; color: var(--accent-cyan);
   text-transform: uppercase; background: rgba(0,229,255,0.1);

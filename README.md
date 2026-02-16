@@ -1,5 +1,9 @@
 # PATHFINDER: First Contact Protocol
 
+<p align="center">
+  <img src="images/hero.png" alt="ISV Curiosity bridge crew approaching Kepler-442b" width="100%">
+</p>
+
 > *"The illiterate of the 21st century will not be those who cannot read and write, but those who cannot learn, unlearn, and relearn."*
 > — Often attributed to Alvin Toffler, actually a mashup of Toffler + psychologist Herbert Gerjuoy
 
