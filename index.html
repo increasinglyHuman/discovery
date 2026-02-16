@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PATHFINDER — First Contact Protocol</title>
+</head>
+<body>
+
+<div id="starfield"></div>
+
+<div id="game">
+  <div id="screen-title" class="screen title-screen active">
+    <div class="title-hero">
+      <img src="images/bridge-approach.png" alt="" class="title-hero-img">
+      <div class="title-hero-overlay"></div>
+    </div>
+    <div class="title-logo">PATHFINDER</div>
+    <div class="title-sub">First Contact Protocol</div>
+    <p class="title-intro">
+      You are the lead science officer aboard the ISV <em>Curiosity</em>,
+      humanity's first interstellar expedition. You've arrived at Kepler-442b —
+      a world no human has ever seen.<br><br>
+      Your scanner array has <em>limited power reserves</em> — you won't be able to run every test.
+      Choose wisely. And remember: the best explorers don't rush to conclusions.
+      They <em>hold multiple possibilities open</em> until the evidence tells the full story.
+    </p>
+    <button class="btn primary" id="btn-start">Begin Mission</button>
+  </div>
+
+  <div id="screen-encounter" class="screen"></div>
+  <div id="screen-result" class="screen"></div>
+  <div id="screen-log" class="screen ship-log"></div>
+  <div id="screen-final" class="screen final-results"></div>
+</div>
+
+<!-- RISK CONFIRMATION OVERLAY -->
+<div id="risk-overlay" class="risk-overlay">
+  <div class="risk-dialog">
+    <div class="risk-dialog-icon">!</div>
+    <h3>Caution — Potential Impact</h3>
+    <p id="risk-warning-text"></p>
+    <div class="risk-dialog-actions">
+      <button class="btn" id="btn-cancel-risk">Abort Scan</button>
+      <button class="btn btn-danger" id="btn-proceed-risk">Proceed Anyway</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
