@@ -554,6 +554,43 @@ body {
   .sb-initials { font-size: 0.9rem; }
 }
 
+/* ── Ecological Footprint ────────────────────────── */
+.ecological-footprint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  margin: 8px auto 16px;
+  max-width: 400px;
+  border-radius: 8px;
+  background: rgba(255,71,87,0.06);
+  border: 1px solid rgba(255,71,87,0.15);
+}
+.ecological-footprint.clean {
+  background: rgba(71,255,160,0.06);
+  border-color: rgba(71,255,160,0.15);
+}
+.footprint-label {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.footprint-value {
+  color: var(--accent-red);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.footprint-value.clean {
+  color: var(--accent-green);
+}
+.footprint-detail {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
 /* ── Advice Card ─────────────────────────────────── */
 .advice-card {
   background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(71,255,160,0.06));

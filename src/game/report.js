@@ -46,7 +46,7 @@ export function submitReport() {
   const accuracy = Math.max(0, Math.min(50, Math.round(accuracyRaw + 20)));
 
   const total = openness + accuracy;
-  state.scores.push({ openness, accuracy, total, encounter: enc.title });
+  state.scores.push({ openness, accuracy, total, encounter: enc.title, riskyUsed: state.riskyUsed });
 
   renderResult(enc, openness, accuracy, total);
 }

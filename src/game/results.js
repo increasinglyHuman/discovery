@@ -109,7 +109,13 @@ function nextEncounter() {
 
 function renderFinalResults() {
   const screen = document.getElementById('screen-final');
-  const avgScore = Math.round(state.scores.reduce((a, s) => a + s.total, 0) / state.scores.length);
+  const rawAvg = Math.round(state.scores.reduce((a, s) => a + s.total, 0) / state.scores.length);
+
+  // Ecological footprint: -3 per risky scan used
+  const riskyCount = state.scores.filter(s => s.riskyUsed).length;
+  const penalty = riskyCount * 3;
+  const avgScore = Math.max(0, rawAvg - penalty);
+
   const rank = RANKS.find(r => avgScore >= r.min && avgScore <= r.max) || RANKS[0];
 
   let breakdownHTML = '';
@@ -124,12 +130,25 @@ function renderFinalResults() {
   // Generate personalized advice
   const adviceHTML = generateAdvice(state.scores);
 
+  const footprintHTML = riskyCount > 0
+    ? `<div class="ecological-footprint">
+        <span class="footprint-label">Ecological Footprint</span>
+        <span class="footprint-value">-${penalty}</span>
+        <span class="footprint-detail">${riskyCount} risky scan${riskyCount > 1 ? 's' : ''}</span>
+      </div>`
+    : `<div class="ecological-footprint clean">
+        <span class="footprint-label">Ecological Footprint</span>
+        <span class="footprint-value clean">0</span>
+        <span class="footprint-detail">No disturbances</span>
+      </div>`;
+
   screen.innerHTML = `
     <div class="final-rank-label">Your Explorer Rank</div>
     <div class="final-rank ${rank.cls}">${rank.name}</div>
     <div class="final-score-big">${avgScore}</div>
 
     <div class="final-breakdown">${breakdownHTML}</div>
+    ${footprintHTML}
 
     <p style="max-width:500px; text-align:center; color:var(--text-dim); font-size:0.9rem; line-height:1.7; margin-bottom:20px;">
       ${rank.desc}
